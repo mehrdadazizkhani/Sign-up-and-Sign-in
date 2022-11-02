@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import styles from '../components/SignUp.module.css'
+import styles from './SignUp.module.css'
 import { validate } from './validate';
 import { notify } from './toast';
 
@@ -44,48 +44,75 @@ const SignUp = () => {
                 name: true,
                 email: true,
                 password: true,
-                confirmPassword: true
+                confirmPassword: true,
+                isAccepted: true
             })
         }
     }
 
     return (
-        <div>
-            <form onSubmit={submitHandler}>
-                <h2>SignUp</h2>
-                <div>
+        <div className={styles.container}>
+            <form onSubmit={submitHandler} className={styles.formContainer}>
+                <h2 className={styles.heading}>SignUp</h2>
+                <fieldset className={styles.fieldSet}>
                     <label>Name</label>
-                    <input type="text" name="name" value={data.name} onChange={changeHandler} onFocus={touchHandler}/>
+                    <input
+                        className={(touched.name && errors.nameError) ? styles.uncompleted : styles.formInput} 
+                        type="text" 
+                        name="name" 
+                        value={data.name} 
+                        onChange={changeHandler} 
+                        onFocus={touchHandler}
+                    />
                     {touched.name && errors.nameError && <span>{errors.nameError}</span>}
-                </div>
-                <div>
+                </fieldset>
+                <fieldset className={styles.fieldSet}>
                     <label>Email</label>
-                    <input type="email" name="email" value={data.email} onChange={changeHandler} onFocus={touchHandler}/>
-                    {touched.email && errors.emailError && <span>{errors.emailError}</span>}
-                    
-                </div>
-                <div>
+                    <input
+                        className={(touched.email && errors.emailError) ? styles.uncompleted : styles.formInput}  
+                        type="email" 
+                        name="email" 
+                        value={data.email} 
+                        onChange={changeHandler} 
+                        onFocus={touchHandler}
+                    />
+                    {touched.email && errors.emailError && <span>{errors.emailError}</span>}  
+                </fieldset>
+                <fieldset className={styles.fieldSet}>
                     <label>Password</label>
-                    <input type="password" name="password" value={data.password} onChange={changeHandler} onFocus={touchHandler}/>
+                    <input 
+                        className={(touched.password && errors.passwordError) ? styles.uncompleted : styles.formInput} 
+                        type="password" 
+                        name="password" 
+                        value={data.password} 
+                        onChange={changeHandler} 
+                        onFocus={touchHandler}
+                    />
                     {touched.password && errors.passwordError && <span>{errors.passwordError}</span>}
-                    
-                </div>
-                <div>
+                </fieldset>
+                <fieldset className={styles.fieldSet}>
                     <label>Confirm Password</label>
-                    <input type="password" name="confirmPassword" value={data.confirmPassword} onChange={changeHandler} onFocus={touchHandler}/>
-                    {touched.confirmPassword && errors.confirmPasswordError && <span>{errors.confirmPasswordError}</span>}
-                    
-                </div>
-                <div>
-                    <label>I accept terms of privacy policy</label>
-                    <input type="checkbox" name="isAccepted" value={data.isAccepted} onChange={changeHandler} onFocus={touchHandler}/>
-                    {errors.isAcceptedError && <span>{errors.isAcceptedError}</span>}
-                    
-                </div>
-                <div>
+                    <input
+                        className={(touched.confirmPassword && errors.confirmPasswordError) ? styles.uncompleted : styles.formInput}  
+                        type="password" 
+                        name="confirmPassword" 
+                        value={data.confirmPassword} 
+                        onChange={changeHandler} 
+                        onFocus={touchHandler}
+                    />
+                    {touched.confirmPassword && errors.confirmPasswordError && <span>{errors.confirmPasswordError}</span>} 
+                </fieldset>
+                <fieldset className={styles.fieldSet}>
+                    <div className={styles.checkboxField}>
+                        <label>I accept terms of privacy policy</label>
+                        <input type="checkbox" name="isAccepted" value={data.isAccepted} onChange={changeHandler} onFocus={touchHandler}/>
+                    </div>
+                    {touched.isAccepted && errors.isAcceptedError && <span>{errors.isAcceptedError}</span>} 
+                </fieldset>
+                <fieldset className={styles.formButtons}>
                     <a href="#">Login</a>
                     <button type="submit">Sign Up</button>
-                </div>
+                </fieldset>
             </form>
             <ToastContainer />
         </div>
