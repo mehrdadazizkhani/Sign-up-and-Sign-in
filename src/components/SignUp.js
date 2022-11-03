@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './SignUp.module.css'
 import { validate } from './validate';
 import { notify } from './toast';
+import { Link } from 'react-router-dom';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -19,7 +20,7 @@ const SignUp = () => {
     const [touched, setTouched] = useState({})
 
     useEffect(() => {
-        setErrors(validate(data))
+        setErrors(validate(data, "signup"))
     }, [data, touched])
 
     const changeHandler = event => {
@@ -53,7 +54,7 @@ const SignUp = () => {
     return (
         <div className={styles.container}>
             <form onSubmit={submitHandler} className={styles.formContainer}>
-                <h2 className={styles.heading}>SignUp</h2>
+                <h2 className={styles.heading}>Sign up</h2>
                 <fieldset className={styles.fieldSet}>
                     <label>Name</label>
                     <input
@@ -110,8 +111,8 @@ const SignUp = () => {
                     {touched.isAccepted && errors.isAcceptedError && <span>{errors.isAcceptedError}</span>} 
                 </fieldset>
                 <fieldset className={styles.formButtons}>
-                    <a href="#">Login</a>
-                    <button type="submit">Sign Up</button>
+                    <Link to="/login">Sign In</Link>
+                    <button type="submit">Sign up</button>
                 </fieldset>
             </form>
             <ToastContainer />
