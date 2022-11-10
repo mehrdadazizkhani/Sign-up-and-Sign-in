@@ -70,7 +70,7 @@ const SignIn = () => {
                     {touched.password && errors.passwordError && <span>{errors.passwordError}</span>}
                 </fieldset>
                 <fieldset className={styles.formButtons}>
-                    <Link to="/signup">CreLinkte account</Link>
+                    <Link to="/signup">Create account</Link>
                     <button type="submit">Sign in</button>
                 </fieldset>
             </form>
